@@ -44,7 +44,7 @@ const getInitialSession = () => ({
     }
 });
 
-const getSmartResponse = (sessionId, message) => {
+const getSmartResponse = async (sessionId, message) => {
     let session = sessions[sessionId];
     if (!session) {
         session = getInitialSession();
@@ -123,7 +123,7 @@ const getSmartResponse = (sessionId, message) => {
         case STAGES.CONFIRM_EMAIL:
             if (msg.includes('yes') || msg.includes('correct') || msg.includes('yeah') || msg.includes('right')) {
                 session.stage = STAGES.CLOSING;
-                sendLeadEmail(session);
+                await sendLeadEmail(session);
                 return {
                     text: "Excellent! Your insights are now with our team at Polymath Code. We will carefully review your requirements, and a dedicated specialist will be in touch with you directly within 2-4 business hours.\n\nWe appreciate you choosing Polymath Code to bring your digital vision to life. Is there anything else I can quickly assist you with before I forward your details?"
                 };
@@ -179,14 +179,16 @@ const sendLeadEmail = async (session) => {
 }
 
 // Endpoints
-app.post('/api/chat', (req, res) => {
+app.post('/api/chat', async (req, res) => {
     const { message, sessionId } = req.body;
     const sId = sessionId || uuidv4();
 
     console.log(`[PolyMath AI Contact] Session ${sId} : ${message}`);
 
-    const response = getSmartResponse(sId, message);
+    const response = await getSmartResponse(sId, message);
     sessions[sId].data.transcript.push({ sender: 'ai', text: response.text });
+
+    console.log(`[PolyMath AI Contact] Response for ${sId}: ${response.text.substring(0, 50)}...`);
 
     res.json({
         response: response.text,
