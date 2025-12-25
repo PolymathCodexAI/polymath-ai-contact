@@ -1,6 +1,7 @@
 services:
   - type: web
     name: polymath-ai-contact-backend
+    plan: free
     env: node
     buildCommand: cd server && npm install
     startCommand: cd server && node server.js

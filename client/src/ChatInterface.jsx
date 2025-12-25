@@ -23,7 +23,7 @@ const ChatInterface = () => {
     const [sessionId, setSessionId] = useState(null);
     const listRef = useRef(null);
 
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const API_URL = import.meta.env.VITE_API_URL || 'https://polymath-ai-contact.onrender.com';
 
     const scrollToBottom = () => {
         if (listRef.current) {

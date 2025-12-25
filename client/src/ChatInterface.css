@@ -1,16 +1,16 @@
 .phone-container {
-    width: 100%;
-    max-width: 420px;
-    height: 850px;
+    width: 95%;
+    max-width: 380px;
+    height: 90%;
+    max-height: 720px;
     background: #0f172a;
-    border-radius: 40px;
-    border: 12px solid #1e293b;
+    border-radius: 32px;
+    border: 8px solid #1e293b;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    margin: 20px auto;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     color: #f8fafc;
 }
